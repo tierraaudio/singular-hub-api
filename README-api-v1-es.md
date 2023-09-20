@@ -97,6 +97,7 @@ Con el parámetro **with_info** por defecto (inactivo):
         "tag_list": [1, 2]
     }
 }
+```
 
 Con el parámetro **with_info** activo:
 ```json
