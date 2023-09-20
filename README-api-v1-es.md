@@ -971,7 +971,7 @@ Listado de canales de tiempo real a los que me puedo suscribir y a los que estoy
 }
 ```
 * **Canales disponibles**:
-  * ```tag```: Devuelve información en tiempo real cada vez que un Tag se conecta al Hub y le envía culquier tipo de información. Es igual que hacer una petición de tipo {get-tag}, pero sin ```calibration```y sin ```reads```.
+  * ```tags```: Devuelve información en tiempo real cada vez que un Tag se conecta al Hub y le envía culquier tipo de información. Es igual que hacer una petición de tipo {get-tag}, pero sin ```calibration```y sin ```reads```.
   * ```reads```: Devuelve información en tiempo real cada vez que un Tag se conecta al Hub y le envía información sobre sus lecturas. Es igual que hacer una petición de tipo {get-reads}.
   * ```config```: Devuelve información en tiempo real cada vez que se actualiza la configuración de un Tag porque este se ha conectado al Hub y tenía programada una configuración.
   * ```errors```: Devuelve información en tiempo real sobre los errores que se pueden estar produciendo en el Hub a medida que recibe conexiones de los Tags.
@@ -997,32 +997,33 @@ Listado de canales de tiempo real a los que me puedo suscribir y a los que estoy
 
 # subscribe
 
-Suscribirme a un canal de tiempo real.
+Suscribirme a uno o varios canales de recepción de datos en tiempo real.
 
 **PETICIÓN**
 ```json
 {
     "command": "subscribe",
     "params": {
-        "channel": "reads",
+        "channels": ["tags", "reads"],
         "tags": []
     }
 }
 ```
-* **channel**: Canal al que deseas suscribirte.
-* **tags**: lista de tags de los que quieres recibir información en este canal de tiempo real (reemplaza el listado de tags vigente). Vacio para recuperar información de todos los Tags.
+* **channels**: canales a los que deseas suscribirte. No puede estar vacío.
+* **tags**: lista de tags de los que quieres recibir información en este canal de tiempo real (reemplaza el listado de tags vigente). Dejar vacío para indicar todos los Tags.
 
 **RESPUESTA**
 ```json
 {
     "response": "subscribe",
     "data": {
-        "channel": "reads",
-        "subscribed": true,
+        "channels": ["tags", "reads"],
         "tags": []
     }
 }
 ```
+* **channels**: devuelve los canales a los que se ha podido suscribir.
+* **tags**: devuelve los Tags a los que se ha podido suscribir.
 
 **POSIBLES ERRORES**
 
@@ -1033,25 +1034,25 @@ Suscribirme a un canal de tiempo real.
 
 # unsubscribe
 
-Desuscribirme de un canal de tiempo real.
+Anular la suscripción a canales de recepción de datos en tiempo real.
 
 **PETICIÓN**
 ```json
 {
     "command": "unsubscribe",
     "params": {
-        "channel": "reads"
+        "channels": ["reads"]
     }
 }
 ```
-* **channel**: Canal del que deseas desuscribirte.
+* **channels**: Canales de los que deseas cancelar la suscripción.
 
 **RESPUESTA**
 ```json
 {
     "response": "unsubscribe",
     "data": {
-        "channel": "reads",
+        "channels": "reads",
         "subscribed": false
     }
 }
