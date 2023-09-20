@@ -35,7 +35,7 @@ Las repuestas se reciben en un objeto JSON con 2 atributos:
 {
     "response": "get-tags"
     "data": {
-        "tag_list": [1, 2, 3, 4, 5, 6]
+        "tag_list": [1, 2]
     }
 }
 ```
@@ -89,10 +89,46 @@ Los devuelve ordenados decendentemente por fecha de última conexión del Tag al
 
 **RESPUESTA**
 ```json
+// Con el parámetro **with_info** por defecto (inactivo):
 {
     "response": "get-tags",
     "data": {
-        "tag_list": [1, 2, 3, 4, 5, 6]
+        "tag_list": [1, 2]
+    }
+}
+
+// Con el parámetro **with_info** activo:
+{
+    "response": "get-tags",
+    "data": {
+        "tag_list": [
+            {
+                "tag_id": 1,
+                "fw_id": 1,
+                "created_at": "2023-09-20 08:00:51",
+                "updated_at": "2023-09-20 08:00:51",
+                "first_read": "2023-09-20 08:00:51",
+                "last_read": "2023-09-20 08:10:51",
+                "last_records": 2,
+                "total_records": 2,
+                "total_reads": 1,
+                "stored_days": 1,
+                "stored_reads": 1
+            },
+            {
+                "tag_id": 2,
+                "fw_id": 1,
+                "created_at": "2023-09-21 09:00:51",
+                "updated_at": "2023-09-21 09:00:51",
+                "first_read": "2023-09-21 09:00:51",
+                "last_read": "2023-09-21 09:10:51",
+                "last_records": 5,
+                "total_records": 5,
+                "total_reads": 1,
+                "stored_days": 1,
+                "stored_reads": 1
+            }
+        ]
     }
 }
 ```
@@ -124,7 +160,7 @@ Consultar la configuración y situación COMPLETA de un Tag
 * **with_config**: [**true** | false] Devolver o no el objeto ```config```del Tag, que contiene la última configuración conocida del Tag, incluyendo la de las ```custom_zones```.
 * **with_status**: [**true** | false] Devolver o no el objeto ```status```del Tag, que contiene el último estado conocido del Tag.
 * **with_calibration**: [true | **false**] Devolver o no el objeto ```calibration```del Tag, que contiene la calibración de fábrica del Tag.
-* **with_zones**: [**true** | false] Devolver o no el objeto ```zones```del Tag, que contiene la información calculada para las ```custom_zones``` configuradas, siempre en función de las lecturas almacenadas.
+* **with_zones**: [**true** | false] Devolver o no el objeto ```zones```del Tag, que contiene la información calculada para las ```custom_zones``` configuradas, además de para las zonas por defecto. Su contenido puede variar en función del número de lecturas almacenadas.
 * **with_reads**: [true | **false**] Devolver o no el objeto ```reads```del Tag, que contiene la última colección completa de lecturas que el Tag envió al Hub.
 
 **RESPUESTA**
