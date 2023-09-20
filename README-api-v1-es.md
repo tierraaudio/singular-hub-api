@@ -89,7 +89,7 @@ Los devuelve ordenados decendentemente por fecha de última conexión del Tag al
 
 **RESPUESTA**
 ```json
-// Con el parámetro **with_info** por defecto (inactivo):
+# Con el parámetro **with_info** por defecto (inactivo):
 {
     "response": "get-tags",
     "data": {
@@ -97,7 +97,7 @@ Los devuelve ordenados decendentemente por fecha de última conexión del Tag al
     }
 }
 
-// Con el parámetro **with_info** activo:
+# Con el parámetro **with_info** activo:
 {
     "response": "get-tags",
     "data": {
