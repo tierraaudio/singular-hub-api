@@ -13,6 +13,15 @@ Las peticiones se realizan enviando por el websocket un objeto JSON que tendrá 
 1. ```command```: siempre será un identificador de tipo cadena que indicará el comando remoto que queremos ejecutar.
 2. ```params```: puede no estar presente, puede ser un atributo, puede ser un objeto (incluso vacío) o puede ser una colección (incluso vacía), en función del tipo de comando elegido.
 
+```json
+{
+    "command": "get-tags"
+    "params": {
+        "with_info": false
+    }
+}
+```
+
 Para optimizar el canal de comunicación, el objeto JSON siempre debe enviarse minificado hacia el Hub, es decir, sin espacios en blanco.
 
 ## Respuestas (Response)
@@ -24,13 +33,12 @@ Las repuestas se reciben en un objeto JSON con 2 atributos:
 
 ```json
 {
-    "response": ""
+    "response": "get-tags"
     "data": {
-        ...
+        "tag_list": [1, 2, 3, 4, 5, 6]
     }
 }
 ```
-
 
 Para optimizar el canal de comunicación, el objeto JSON de respuesta siempre se devolverá minificado desde el Hub, es decir, sin espacios en blanco.
 
@@ -41,9 +49,22 @@ Los errores se reciben en un objeto JSON de tipo ```response``` cuyo valor espec
 1. ```response: "error"```
 2. ```data```: contiene una colección ```errors``` con un objeto por cada error, en orden según se han producido:
    * ```errors```
-       * ```code```: el número que identifica unívocamente el tipo de error.
+       * ```code```: cadena que identifica unívocamente el tipo de error (aunque sea un número, irá en formato cadena).
        * ```message```: el texto descriptivo del error en el idioma en el que se esté trabajando.
        * ```info```: información adicional sobre el error (no siempre estará presente o tendrá valor).
+
+```json
+{
+    "response": "error"
+    "data": {
+        "errors": [{
+            "code": "100",
+            "message": "Memoria insuficiente para atender la petición.",
+            "info": ""
+        }]
+    }
+}
+```
 
 Para optimizar el canal de comunicación, el objeto JSON de error siempre se devolverá minificado desde el Hub, es decir, sin espacios en blanco.
 
