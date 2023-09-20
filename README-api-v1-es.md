@@ -88,8 +88,9 @@ Los devuelve ordenados decendentemente por fecha de última conexión del Tag al
 * **only_with_changes**: [**true** | false] Devolver solo los tags que han recibido nuevas lecturas de sensores desde la última vez que lo consulté.
 
 **RESPUESTA**
+
+Con el parámetro **with_info** por defecto (inactivo):
 ```json
-# Con el parámetro **with_info** por defecto (inactivo):
 {
     "response": "get-tags",
     "data": {
@@ -97,7 +98,8 @@ Los devuelve ordenados decendentemente por fecha de última conexión del Tag al
     }
 }
 
-# Con el parámetro **with_info** activo:
+Con el parámetro **with_info** activo:
+```json
 {
     "response": "get-tags",
     "data": {
