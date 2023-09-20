@@ -26,13 +26,14 @@ Para optimizar el canal de comunicación, el objeto JSON de respuesta siempre se
 
 ## Errores (Response: "error")
 
-Los errores se reciben en un objeto JSON de tipo ```response``` cuyo valor específico será siempre ```"error"```. En el atributo ```data``` estará la información detallada del error:
+Los errores se reciben en un objeto JSON de tipo ```response``` cuyo valor específico será siempre ```"error"```. En el atributo ```data``` habrá una colección ```errors``` con la información detallada de cada error (pueden ser uno o varios):
 
 1. ```response: "error"```
-2. ```data```: puede contener los siguientes atributos:
-   * ```code```: el número que identifica unívocamente el tipo de error.
-   * ```message```: el texto descriptivo del error en el idioma en el que se esté trabajando.
-   * ```info```: información adicional sobre el error (no siempre estará presente o tendrá valor).
+2. ```data```: contiene una colección ```errors``` con un objeto por cada error, en orden según se han producido:
+   * ```errors```
+       * ```code```: el número que identifica unívocamente el tipo de error.
+       * ```message```: el texto descriptivo del error en el idioma en el que se esté trabajando.
+       * ```info```: información adicional sobre el error (no siempre estará presente o tendrá valor).
 
 Para optimizar el canal de comunicación, el objeto JSON de error siempre se devolverá minificado desde el Hub, es decir, sin espacios en blanco.
 
