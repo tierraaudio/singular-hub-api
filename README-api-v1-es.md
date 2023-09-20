@@ -22,6 +22,16 @@ Las repuestas se reciben en un objeto JSON con 2 atributos:
 1. ```response```: siempre será un identificador de tipo cadena que indicará el comando remoto al cual corresponde la respuesta.
 2. ```data```: puede no estar presente, puede ser un atributo, puede ser un objeto (incluso vacío) o puede ser una colección (incluso vacía), en función del tipo de comando elegido.
 
+```json
+{
+    "response": ""
+    "data": {
+        ...
+    }
+}
+```
+
+
 Para optimizar el canal de comunicación, el objeto JSON de respuesta siempre se devolverá minificado desde el Hub, es decir, sin espacios en blanco.
 
 ## Errores (Response: "error")
