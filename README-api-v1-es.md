@@ -741,6 +741,7 @@ Si se envía un parámetro que no puede ser configurado, como ```tag_id```, el T
     "command": "set-config",
     "params": {
         "tags": [1, 2, 3],
+        "active_from": "2023-10-01 00:00:00",
         "config": {
             "config_active": false,
             "config_id": 0,
@@ -859,22 +860,23 @@ Si se envía un parámetro que no puede ser configurado, como ```tag_id```, el T
     }
 }
 ```
-* **tags**: lista de IDs de Tags que queremos configurar.
-* **config**: configuración que queremos aplicar sobre los Tags indicados.
+* **tags**: lista de IDs de Tags que queremos configurar. Si se envía vacía, entonces la configuración se aplicará sobre cualquier Tag que se conecte al Hub.
+* **active_from**: fecha desde la cual debe activarse esta configuración. Si se envía vacío o no se envía, la configuración se aplicará tan pronto haya comunicación con los Tags indicados en la colección ```tags```.
+* **config**: configuración que queremos aplicar sobre los Tags indicados en la colección ```tags```.
 
 **RESPUESTA**
 
 * Dentro de la colección ```tags``` se indican los Tags para los que se ha almacenado correctamente la configuración.
-
 * Dentro del objeto ```config``` se indican los campos que sí podrán ser actualizados.
 
 ```json
 {
     "response": "set-config",
     "data": [
-        "tags": [],
+        "tags": [1, 2, 3],
+        "active_from": "2023-10-01 00:00:00",
         "config": {
-            
+            ...
         }
     ]
 }
